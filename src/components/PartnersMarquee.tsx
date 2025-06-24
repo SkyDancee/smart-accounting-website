@@ -40,20 +40,20 @@ const PartnersMarquee: React.FC<PartnersMarqueeProps> = ({ className = '' }) => 
     }
   };
 
-  // Fallback partners for demo if no data is available
+  // Fallback partners for demo - using placeholder design instead of missing images
   const fallbackPartners = [
-    { id: '1', name: 'Didox', logo_url: '/images/partners/didox.svg', created_at: '' },
-    { id: '2', name: 'ARTEL', logo_url: '/images/partners/artel.svg', created_at: '' },
-    { id: '3', name: 'UzPharma', logo_url: '/images/partners/uzpharma.svg', created_at: '' },
-    { id: '4', name: 'TrackBox', logo_url: '/images/partners/trackbox.svg', created_at: '' },
-    { id: '5', name: '1C', logo_url: '/images/partners/1c.svg', created_at: '' },
-    { id: '6', name: 'Onecoin', logo_url: '/images/partners/onecoin.svg', created_at: '' },
-    { id: '7', name: 'VIKO', logo_url: '/images/partners/viko.svg', created_at: '' },
-    { id: '8', name: 'ODD', logo_url: '/images/partners/odd.svg', created_at: '' },
-    { id: '9', name: 'Extel', logo_url: '/images/partners/extel.svg', created_at: '' },
-    { id: '10', name: 'Samarkand', logo_url: '/images/partners/samarkand.svg', created_at: '' },
-    { id: '11', name: 'TechCorp', logo_url: '/images/partners/techcorp.svg', created_at: '' },
-    { id: '12', name: 'InnovateLab', logo_url: '/images/partners/innovatelab.svg', created_at: '' },
+    { id: '1', name: 'Didox', logo_url: 'placeholder', created_at: '' },
+    { id: '2', name: 'ARTEL', logo_url: 'placeholder', created_at: '' },
+    { id: '3', name: 'UzPharma', logo_url: 'placeholder', created_at: '' },
+    { id: '4', name: 'TrackBox', logo_url: 'placeholder', created_at: '' },
+    { id: '5', name: '1C', logo_url: 'placeholder', created_at: '' },
+    { id: '6', name: 'Onecoin', logo_url: 'placeholder', created_at: '' },
+    { id: '7', name: 'VIKO', logo_url: 'placeholder', created_at: '' },
+    { id: '8', name: 'ODD', logo_url: 'placeholder', created_at: '' },
+    { id: '9', name: 'Extel', logo_url: 'placeholder', created_at: '' },
+    { id: '10', name: 'Samarkand', logo_url: 'placeholder', created_at: '' },
+    { id: '11', name: 'TechCorp', logo_url: 'placeholder', created_at: '' },
+    { id: '12', name: 'InnovateLab', logo_url: 'placeholder', created_at: '' },
   ];
 
   const displayPartners = partners.length > 0 ? partners : fallbackPartners;
@@ -91,21 +91,28 @@ const PartnersMarquee: React.FC<PartnersMarqueeProps> = ({ className = '' }) => 
     >
       <div className="p-4 flex items-center justify-center">
         <div className="w-28 h-28 relative flex items-center justify-center">
-          <Image
-            src={partner.logo_url}
-            alt={`${partner.name} logo`}
-            width={112}
-            height={112}
-            className="object-contain transition-all duration-300"
-            onError={(e) => {
-              // Fallback placeholder with brand colors
-              const target = e.currentTarget as HTMLImageElement;
-              target.style.display = 'none';
-              if (target.parentElement) {
-                target.parentElement.innerHTML = `<div class="w-28 h-28 bg-gradient-to-br from-[#c9a875] to-[#b8956a] rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-inner">${partner.name.substring(0, 2).toUpperCase()}</div>`;
-              }
-            }}
-          />
+          {partner.logo_url === 'placeholder' ? (
+            // Show stylish placeholder directly
+            <div className="w-28 h-28 bg-gradient-to-br from-[#c9a875] to-[#b8956a] rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-inner">
+              {partner.name.substring(0, 2).toUpperCase()}
+            </div>
+          ) : (
+            <Image
+              src={partner.logo_url}
+              alt={`${partner.name} logo`}
+              width={112}
+              height={112}
+              className="object-contain transition-all duration-300"
+              onError={(e) => {
+                // Fallback placeholder with brand colors
+                const target = e.currentTarget as HTMLImageElement;
+                target.style.display = 'none';
+                if (target.parentElement) {
+                  target.parentElement.innerHTML = `<div class="w-28 h-28 bg-gradient-to-br from-[#c9a875] to-[#b8956a] rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-inner">${partner.name.substring(0, 2).toUpperCase()}</div>`;
+                }
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -162,21 +169,28 @@ const PartnersMarquee: React.FC<PartnersMarqueeProps> = ({ className = '' }) => 
               <div className="hover:opacity-75 transition-all duration-300 transform hover:scale-105">
                 <div className="p-3 flex flex-col items-center justify-center text-center min-w-[120px]">
                   <div className="w-24 h-24 relative flex items-center justify-center mb-2">
-                    <Image
-                      src={partner.logo_url}
-                      alt={`${partner.name} logo`}
-                      width={96}
-                      height={96}
-                      className="object-contain"
-                      onError={(e) => {
-                        // Fallback placeholder with brand colors
-                        const target = e.currentTarget as HTMLImageElement;
-                        target.style.display = 'none';
-                        if (target.parentElement) {
-                          target.parentElement.innerHTML = `<div class="w-24 h-24 bg-gradient-to-br from-[#c9a875] to-[#b8956a] rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-inner">${partner.name.substring(0, 2).toUpperCase()}</div>`;
-                        }
-                      }}
-                    />
+                    {partner.logo_url === 'placeholder' ? (
+                      // Show stylish placeholder directly
+                      <div className="w-24 h-24 bg-gradient-to-br from-[#c9a875] to-[#b8956a] rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-inner">
+                        {partner.name.substring(0, 2).toUpperCase()}
+                      </div>
+                    ) : (
+                      <Image
+                        src={partner.logo_url}
+                        alt={`${partner.name} logo`}
+                        width={96}
+                        height={96}
+                        className="object-contain"
+                        onError={(e) => {
+                          // Fallback placeholder with brand colors
+                          const target = e.currentTarget as HTMLImageElement;
+                          target.style.display = 'none';
+                          if (target.parentElement) {
+                            target.parentElement.innerHTML = `<div class="w-24 h-24 bg-gradient-to-br from-[#c9a875] to-[#b8956a] rounded-xl flex items-center justify-center text-white text-lg font-bold shadow-inner">${partner.name.substring(0, 2).toUpperCase()}</div>`;
+                          }
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
