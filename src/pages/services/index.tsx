@@ -62,7 +62,49 @@ const Services: React.FC = () => {
       </section>
 
       {/* Services Section */}
-      <ServicesSection />
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Наши услуги</h2>
+            <p className="text-gray-600 text-lg">
+              ООО "Smart Accounting" предлагает комплексное обслуживание, которое позволит вам сосредоточиться на развитии бизнеса
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ServiceCard 
+              title="Полное ведение бухгалтерского учета"
+              description="Профессиональное ведение бухгалтерского учета полного цикла в соответствии с законодательством РФ"
+              delay={100}
+            />
+            <ServiceCard 
+              title="Ведение первичной документации"
+              description="Полное ведение первичных бухгалтерских документов, организация документооборота"
+              delay={200}
+            />
+            <ServiceCard 
+              title="Восстановление бухгалтерского учета"
+              description="Восстановление бухгалтерского учета при отсутствии или некорректном ведении"
+              delay={300}
+            />
+            <ServiceCard 
+              title="Оптимизация налогов"
+              description="Легальные способы оптимизации налогообложения для снижения налоговой нагрузки"
+              delay={400}
+            />
+            <ServiceCard 
+              title="Сдача отчетности"
+              description="Своевременная подготовка и сдача всех налоговых и статистических отчетов"
+              delay={500}
+            />
+            <ServiceCard 
+              title="Кадровый учет"
+              description="Полное ведение кадрового учета и оформление документации по сотрудникам"
+              delay={600}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* How We Work Section */}
       <section className="py-20 bg-gray-50">
@@ -190,6 +232,35 @@ const Services: React.FC = () => {
         </div>
       </section>
     </Layout>
+  );
+};
+
+// Service Card Component
+const ServiceCard: React.FC<{ 
+  title: string, 
+  description: string, 
+  delay: number 
+}> = ({ title, description, delay }) => {
+  return (
+    <div 
+      className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-[#c9a875]/20 transition-all duration-300 h-full flex flex-col"
+      data-aos="fade-up"
+      data-aos-delay={delay}
+    >
+      <div className="w-16 h-16 bg-[#c9a875]/10 rounded-full flex items-center justify-center mb-6 text-[#c9a875] text-2xl">
+        <FiCheck />
+      </div>
+      <h3 className="text-xl font-semibold mb-4">{title}</h3>
+      <p className="text-gray-600 flex-grow">{description}</p>
+      <div className="mt-auto pt-4 border-t border-gray-100">
+        <span className="text-[#c9a875] font-medium inline-flex items-center hover:translate-x-2 transition-transform duration-300">
+          Подробнее 
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </div>
+    </div>
   );
 };
 
